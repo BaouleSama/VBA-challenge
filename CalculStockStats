@@ -1,0 +1,54 @@
+' Declare the variable
+Dim i As Long
+
+'for each worksheet
+Dim ws As Worksheet
+
+'for the volume of the stock
+Dim Volume As Double
+
+'for the percentage of change
+Dim Percent_change As Double
+
+'for the ticker
+Dim ticker As String
+
+'for the
+Dim sum_row As Long
+
+'always initialize the variable
+Volume = 0
+sum_row = 2
+ years = 0
+    opening_price = 0
+    Percent_change = 0
+ 'find the last row
+ LastRow = Cells(Rows.Count, 1).End(xlUp).Row
+MsgBox (LastRow)
+
+'write the header for the each worksheet
+For Each ws In ThisWorkbook.Worksheets
+   ws.Activate
+   ws.Range("L1").Value = "Ticker"
+   ws.Cells(1, 10).Value = "Yearly Change"
+   ws.Cells(1, 11).Value = "Percent Change"
+   ws.Range("M1").Value = "Total Stock Volume"
+ 
+    For i = 2 To LastRow
+
+              ticker = Cells(i, 1).Value
+
+            '  Find the values in the table
+              Volume = Volume + Cells(i, 7).Value
+
+             'store the Value to the designeted row
+              ws.Range("L" & sum_row).Value = ticker
+              ws.Range("M" & sum_row).Value = Volume
+
+              sum_row = sum_row + 1
+            
+             'Add up the total stock volume values for a ticker.
+               Volume = Volume + Cells(i, 7).Value
+
+            'Reset the value of volume
+               Volume = 0
